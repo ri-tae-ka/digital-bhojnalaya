@@ -1,6 +1,7 @@
 const Food = require("../models/foodModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const ApiFeatures = require("../utils/apifeatures");
 
 //create food item (ADMIN)
 exports.createItem = catchAsyncErrors(async (req, res, next) => {
@@ -14,7 +15,16 @@ exports.createItem = catchAsyncErrors(async (req, res, next) => {
 
 //get all food items
 exports.getAllItems = catchAsyncErrors(async (req, res) => {
-  const fooditems = await Food.find();
+  const resultsPerPage = 4;
+
+  const fooditemCount = await Food.countDocuments();
+
+  const apiFeature = new ApiFeatures(Food.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultsPerPage);
+
+  const fooditems = await apiFeature.query;
 
   res.status(200).json({
     success: true,
@@ -69,5 +79,6 @@ exports.getItemDetails = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     fooditem,
+    fooditemCount
   });
 });
