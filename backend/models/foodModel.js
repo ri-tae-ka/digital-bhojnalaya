@@ -41,6 +41,11 @@ const foodSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true
+  }
 });
 
 module.exports = mongoose.model("Food", foodSchema);

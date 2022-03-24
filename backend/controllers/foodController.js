@@ -5,6 +5,9 @@ const ApiFeatures = require("../utils/apifeatures");
 
 //create food item (ADMIN)
 exports.createItem = catchAsyncErrors(async (req, res, next) => {
+  
+  req.body.user = req.user.id;
+
   const fooditem = await Food.create(req.body);
 
   res.status(201).json({
