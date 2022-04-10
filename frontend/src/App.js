@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import ViewportProvider from "./viewport";
 import Footer from "./component/layout/Footer/Footer";
 import Home from "./component/Home/Home.js";
+import Menu from "./component/Menu/Menu";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           <Navbar />
           <Routes>
             <Route exact path="/" element={<Home/>} />
+          </Routes>
+          <Routes>
+            <Route path="/Menu" element={<Menu/>} />
           </Routes>
           <Footer />
         </Router>

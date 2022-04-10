@@ -1,0 +1,53 @@
+.heading {
+    text-align: center;
+    font-size: 2vmax;
+    border-bottom: 1px solid black;
+    width: 20vmax;
+    padding: 1vmax;
+    margin: 5vmax auto;
+}
+
+.foodCard {
+    width: 16vmax;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    margin: 2vmax;
+    transition: all 0.5s;
+    padding-bottom: 0.5vmax;
+    border: 1px solid rgb(255, 220, 225);
+}
+
+.foodCard > img {
+    width: 16vmax;
+}
+
+.foodCard > p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3vmax;
+    margin: 1vmax 0.5vmax;
+    margin-bottom: 0;
+}
+
+.foodCard > div > p {
+    font-size: 1vmax;
+    margin: 0.5vmax;
+}
+
+.foodCard > span {
+    margin: 0.5vmax;
+    font-size: 1.2vmax;
+    color: tomato;
+    font-weight: bold;
+}
+
+.foodCard:hover {
+    box-shadow: 0 0 5px palevioletred;
+    transform: translateY(-1vmax);
+}
+
+@media screen and (max-width: 600px) {
+    .foodCard > p {
+        font-size: 1.7vmax;
+    }
+}
