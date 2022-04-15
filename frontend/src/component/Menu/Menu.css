@@ -27,11 +27,13 @@
     font-size: 1.3vmax;
     margin: 1vmax 0.5vmax;
     margin-bottom: 0;
+    color: black;
 }
 
 .foodCard > div > p {
     font-size: 1vmax;
     margin: 0.5vmax;
+    color: rgb(65, 48, 48);
 }
 
 .foodCard > span {

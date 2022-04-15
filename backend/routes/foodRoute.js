@@ -19,6 +19,6 @@ router
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateItem)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteitem);
 
-router.route("/fooditem/:id").get(getItemDetails);
+router.route("/Menu/fooditem/:id").get(getItemDetails);
 
 module.exports = router;

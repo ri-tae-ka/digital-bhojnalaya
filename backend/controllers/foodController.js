@@ -18,7 +18,7 @@ exports.createItem = catchAsyncErrors(async (req, res, next) => {
 
 //get all food items
 exports.getAllItems = catchAsyncErrors(async (req, res) => {
-  const resultsPerPage = 4;
+  const resultsPerPage = 8;
 
   const fooditemCount = await Food.countDocuments();
 
@@ -32,6 +32,7 @@ exports.getAllItems = catchAsyncErrors(async (req, res) => {
   res.status(200).json({
     success: true,
     fooditems,
+    fooditemCount
   });
 });
 
@@ -82,6 +83,5 @@ exports.getItemDetails = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     fooditem,
-    fooditemCount
   });
 });

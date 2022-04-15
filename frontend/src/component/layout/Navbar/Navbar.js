@@ -3,6 +3,7 @@ import { useState } from "react";
 import useViewport from "../../../viewport/useViewport";
 import { FaShoppingCart, FaSearch, FaAddressBook } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import logo from "../../../images/digitalLogo.png"
 
 export default function Navbar() {
   const { isMobile, isTablet } = useViewport();
@@ -11,7 +12,7 @@ export default function Navbar() {
   return (
     <div className="top-bar">
       <div className="top-left">
-        <NavLink to="/"><img className="logo" src="digitalLogo.png" alt="Logo" /></NavLink>
+        <NavLink to="/"><img className="logo" src={logo} alt="Logo" /></NavLink>
       </div>
       <div
         className="top-center"

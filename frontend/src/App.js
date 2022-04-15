@@ -7,6 +7,7 @@ import ViewportProvider from "./viewport";
 import Footer from "./component/layout/Footer/Footer";
 import Home from "./component/Home/Home.js";
 import Menu from "./component/Menu/Menu";
+import FoodDetails from "./component/Food/FoodDetails.js";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/Menu" element={<Menu/>} />
+          </Routes>
+          <Routes>
+            <Route path="/Menu/fooditem/:id" element={<FoodDetails/>} />
           </Routes>
           <Footer />
         </Router>
