@@ -5,7 +5,6 @@ const ApiFeatures = require("../utils/apifeatures");
 
 //create food item (ADMIN)
 exports.createItem = catchAsyncErrors(async (req, res, next) => {
-  
   req.body.user = req.user.id;
 
   const fooditem = await Food.create(req.body);
@@ -22,18 +21,22 @@ exports.getAllItems = catchAsyncErrors(async (req, res) => {
 
   const fooditemCount = await Food.countDocuments();
 
-  const apiFeature = new ApiFeatures(Food.find(), req.query)
-    .search()
-    .filter()
-    .pagination(resultsPerPage);
+  const apiFeature = new ApiFeatures(Food.find(), req.query).search().filter();
 
-  const fooditems = await apiFeature.query;
+  let fooditems = await apiFeature.query;
+
+  let filteredFooditemsCount = fooditems.length;
+
+  apiFeature.pagination(resultsPerPage);
+
+  fooditems = await apiFeature.query.clone();
 
   res.status(200).json({
     success: true,
     fooditems,
     fooditemCount,
-    resultsPerPage
+    resultsPerPage,
+    filteredFooditemsCount,
   });
 });
 

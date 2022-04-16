@@ -1,3 +1,12 @@
+.container {
+    display: flex;
+    margin: 1vmax auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    min-height: 20vh;
+}
+
 .heading {
     text-align: center;
     font-size: 2vmax;
@@ -85,8 +94,46 @@
     background-color: rgb(255, 220, 225) !important;
 }
 
+.filter {
+    width: 8.5vmax;
+    position: absolute;
+    top: 20vmax;
+    left: 2vmax;
+}
+
+.canteens {
+    padding: 0;
+}
+
+.canteen-link {
+    list-style: none;
+    color: black;
+    font: 400 1.2vmax "Roboto";
+    margin: 0.4vmax;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.canteen-link:hover {
+    color: tomato;
+}
+
 @media screen and (max-width: 600px) {
     .foodCard > p {
         font-size: 1.7vmax;
+    }
+
+    .filter {
+        width: 20vmax;
+        position: static;
+        margin: auto;
+    }
+
+    .page-link {
+        font: 300 1.7vmax "Roboto";
+    }
+
+    .canteen-link {
+        font: 400 2vmax "Roboto";
     }
 }

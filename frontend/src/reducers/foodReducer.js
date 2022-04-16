@@ -21,6 +21,7 @@ export const foodReducer = (state = { fooditems: [] }, action) => {
         fooditems: action.payload.fooditems,
         fooditemCount: action.payload.fooditemCount,
         resultsPerPage: action.payload.resultsPerPage,
+        filteredFooditemsCount: action.payload.filteredFooditemsCount,
       };
 
     case ALL_FOODITEM_FAIL:

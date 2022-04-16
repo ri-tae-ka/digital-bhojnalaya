@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFooditemDetails } from "../../actions/foodAction.js";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../layout/Loading/Loading";
+import Metadata from "../layout/Metadata";
 
 const FooditemDetails = (props) => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const FooditemDetails = (props) => {
         <Loading />
       ) : (
         <Fragment>
+          <Metadata title={`${fooditem.food_name}🍴`}/>
           <div className="FoodDetails">
             <div>
               {fooditem.food_images &&

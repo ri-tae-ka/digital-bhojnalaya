@@ -10,14 +10,19 @@ import {
 } from "../constants/foodConstants";
 
 export const getFooditem =
-  (keyword = "", currentPage = 1) =>
+  (keyword = "", currentPage = 1, food_price = [0, 10000], canteen_name) =>
   async (dispatch) => {
     try {
       dispatch({
         type: ALL_FOODITEM_REQUEST,
       });
 
-      let link = `/api/v1/fooditems?keyword=${keyword}&page=${currentPage}`;
+      let link = `/api/v1/fooditems?keyword=${keyword}&page=${currentPage}&food_price[gte]=${food_price[0]}&food_price[lte]=${food_price[1]}`;
+
+      if(canteen_name) {
+        link = `/api/v1/fooditems?keyword=${keyword}&page=${currentPage}&food_price[gte]=${food_price[0]}&food_price[lte]=${food_price[1]}&canteen_name=${canteen_name}`;
+      }
+
       const { data } = await axios.get(link);
 
       dispatch({
