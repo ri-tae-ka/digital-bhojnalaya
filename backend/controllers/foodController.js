@@ -32,7 +32,8 @@ exports.getAllItems = catchAsyncErrors(async (req, res) => {
   res.status(200).json({
     success: true,
     fooditems,
-    fooditemCount
+    fooditemCount,
+    resultsPerPage
   });
 });
 

@@ -63,7 +63,7 @@ export default function Navbar() {
       </div>
       <div className="top-right">
         <div className="navbar-icons">
-          <a href="/">
+          <a href="/search">
             <FaSearch />
           </a>
           <a href="/">

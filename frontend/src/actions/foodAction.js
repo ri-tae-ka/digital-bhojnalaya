@@ -9,37 +9,40 @@ import {
   CLEAR_ERRORS,
 } from "../constants/foodConstants";
 
-export const getFooditem = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: ALL_FOODITEM_REQUEST,
-    });
-    const {data} = await axios.get("/api/v1/fooditems");
+export const getFooditem =
+  (keyword = "", currentPage = 1) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ALL_FOODITEM_REQUEST,
+      });
 
-    dispatch({
+      let link = `/api/v1/fooditems?keyword=${keyword}&page=${currentPage}`;
+      const { data } = await axios.get(link);
+
+      dispatch({
         type: ALL_FOODITEM_SUCCESS,
         payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: ALL_FOODITEM_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_FOODITEM_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 export const getFooditemDetails = (id) => async (dispatch) => {
   try {
     dispatch({
       type: FOODITEM_DETAILS_REQUEST,
     });
-    const {data} = await axios.get(`/api/v1/Menu/fooditem/${id}`);
+    const { data } = await axios.get(`/api/v1/Menu/fooditem/${id}`);
 
     dispatch({
-        type: FOODITEM_DETAILS_SUCCESS,
-        payload: data.fooditem,
-    })
+      type: FOODITEM_DETAILS_SUCCESS,
+      payload: data.fooditem,
+    });
   } catch (error) {
     dispatch({
       type: FOODITEM_DETAILS_FAIL,
@@ -48,11 +51,9 @@ export const getFooditemDetails = (id) => async (dispatch) => {
   }
 };
 
-
-
 //clear errors
 export const clearErrors = () => async (dispatch) => {
-    dispatch({
-        type: CLEAR_ERRORS,
-    });
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
 };

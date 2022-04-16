@@ -1,20 +1,30 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./Menu.css";
 import FoodCard from "../Home/Food.js";
 import { getFooditem } from "../../actions/foodAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../layout/Loading/Loading";
+import { useParams } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
-const Menu = () => {
+const Menu = (props) => {
   const dispatch = useDispatch();
 
-  const { loading, error, fooditems, fooditemCount } = useSelector(
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { loading, error, fooditems, fooditemCount, resultsPerPage } = useSelector(
     (state) => state.fooditems
   );
 
+  const setCurrentPageNo = (e) => {
+    setCurrentPage(e)
+  }
+
+  const { keyword } = useParams();
+
   useEffect(() => {
-    dispatch(getFooditem());
-  }, [dispatch]);
+    dispatch(getFooditem(keyword, currentPage));
+  }, [dispatch, keyword, currentPage]);
 
   // const food = {
   //   food_name: "Noodles",
@@ -43,8 +53,29 @@ const Menu = () => {
         <FoodCard food={food} />
         <FoodCard food={food} /> */}
             {fooditems &&
-              fooditems.map((fooditem) => <FoodCard food={fooditem} />)}
+              fooditems.map((fooditem) => (
+                <FoodCard food={fooditem} key={fooditem._id} />
+              ))}
           </div>
+
+          {resultsPerPage < fooditemCount && (
+            <div className="paginationBox">
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={resultsPerPage}
+              totalItemsCount={fooditemCount}
+              onChange={setCurrentPageNo}
+              nextPageText="Next"
+              prevPageText="Prev"
+              firstPageText="First"
+              lastPageText="Last"
+              itemClass="page-item"
+              linkClass="page-link"
+              activeClass="pageItemActive"
+              activeLinkClass="pageLinkActive"
+            />
+          </div>
+          )}
         </Fragment>
       )}
     </Fragment>

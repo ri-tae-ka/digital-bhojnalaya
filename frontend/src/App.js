@@ -8,6 +8,7 @@ import Footer from "./component/layout/Footer/Footer";
 import Home from "./component/Home/Home.js";
 import Menu from "./component/Menu/Menu";
 import FoodDetails from "./component/Food/FoodDetails.js";
+import Search from "./component/Food/Search.js";
 
 function App() {
   return (
@@ -23,6 +24,12 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/Menu/fooditem/:id" element={<FoodDetails/>} />
+          </Routes>
+          <Routes>
+            <Route path="/Menu/fooditems/:keyword" element={<Menu/>} />
+          </Routes>
+          <Routes>
+            <Route path="/search" element={<Search/>} />
           </Routes>
           <Footer />
         </Router>
