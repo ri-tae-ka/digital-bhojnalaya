@@ -9,6 +9,7 @@ import Home from "./component/Home/Home.js";
 import Menu from "./component/Menu/Menu";
 import FoodDetails from "./component/Food/FoodDetails.js";
 import Search from "./component/Food/Search.js";
+import LoginSignup from "./component/User/LoginSignup";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/search" element={<Search/>} />
+          </Routes>
+          <Routes>
+            <Route path="/login" element={<LoginSignup/>} />
           </Routes>
           <Footer />
         </Router>

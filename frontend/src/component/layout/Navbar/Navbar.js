@@ -3,7 +3,10 @@ import { useState } from "react";
 import useViewport from "../../../viewport/useViewport";
 import { FaShoppingCart, FaSearch, FaAddressBook } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import logo from "../../../images/digitalLogo.png"
+import logo from "../../../images/digitalLogo.png";
+import Search from "@mui/icons-material/SearchOutlined"
+import Cart from "@mui/icons-material/ShoppingCart";
+import Account from "@mui/icons-material/AccountCircle";
 
 export default function Navbar() {
   const { isMobile, isTablet } = useViewport();
@@ -64,13 +67,13 @@ export default function Navbar() {
       <div className="top-right">
         <div className="navbar-icons">
           <a href="/search">
-            <FaSearch />
+            <Search />
           </a>
           <a href="/">
-            <FaShoppingCart />
+            <Cart />
           </a>
-          <a href="/">
-            <FaAddressBook />
+          <a href="/login">
+            <Account />
           </a>
         </div>
         <div className="Menu" style={{ display: isMobile ? "inline" : "none" }}>
