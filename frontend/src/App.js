@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import "./App.css";
 import Navbar from "./component/layout/Navbar/Navbar";
-import { BrowserRouter as Router, Navigate } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import ViewportProvider from "./viewport";
 import Footer from "./component/layout/Footer/Footer";
@@ -17,6 +17,9 @@ import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile.js";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
 import UpdateProfile from "./component/User/UpdateProfile.js";
+import UpdatePassword from "./component/User/UpdatePassword.js";
+import ForgotPassword from "./component/User/ForgotPassword.js";
+import ResetPassword from "./component/User/ResetPassword.js";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -56,6 +59,15 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/me/update" element={<ProtectedRoute><UpdateProfile/></ProtectedRoute>} />
+          </Routes>
+          <Routes>
+            <Route path="/password/update" element={<ProtectedRoute><UpdatePassword/></ProtectedRoute>} />
+          </Routes>
+          <Routes>
+            <Route path="/password/forgot" element={<ForgotPassword/>} />
+          </Routes>
+          <Routes>
+            <Route path="/password/reset/:token" element={<ResetPassword/>} />
           </Routes>
           <Footer />
         </Router>
