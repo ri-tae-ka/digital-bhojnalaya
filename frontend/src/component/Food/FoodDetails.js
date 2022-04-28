@@ -1,13 +1,14 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./FoodDetails.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getFooditemDetails } from "../../actions/foodAction.js";
+import { clearErrors, getFooditemDetails } from "../../actions/foodAction.js";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../layout/Loading/Loading";
 import Metadata from "../layout/Metadata";
+import {addItemsToCart} from "../../actions/cartAction";
 
-const FooditemDetails = (props) => {
+const FooditemDetails = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
@@ -18,7 +19,37 @@ const FooditemDetails = (props) => {
 
   //console.log(id);
 
+  const [quantity, setQuantity] = useState(1);
+
+  const decreaseQuantity = () => {
+    if (quantity <= 1) return;
+
+    const qty = quantity - 1;
+    setQuantity(qty);
+  };
+
+  const increaseQuantity = () => {
+    if (fooditem.food_quantity <= quantity) {
+      window.alert("Oops! You cannot add more than that!");
+      return;
+    }
+
+    const qty = quantity + 1;
+    setQuantity(qty);
+  };
+
+  const addToCartHandler = () => {
+    //alert("here");
+    dispatch(addItemsToCart(id, quantity));
+    //alert("now here");
+    window.alert("Item added to your cart!");
+  };
+
   useEffect(() => {
+    if (error) {
+      window.alert(error);
+      dispatch(clearErrors);
+    }
     dispatch(getFooditemDetails(id));
   }, [dispatch, id]);
 
@@ -28,18 +59,18 @@ const FooditemDetails = (props) => {
         <Loading />
       ) : (
         <Fragment>
-          <Metadata title={`${fooditem.food_name}🍴`}/>
+          <Metadata title={`${fooditem.food_name}🍴`} />
           <div className="FoodDetails">
             <div>
               {fooditem.food_images &&
-                  fooditem.food_images.map((item, i) => (
-                    <img
-                      className="CarouselImage"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  ))}
+                fooditem.food_images.map((item, i) => (
+                  <img
+                    className="CarouselImage"
+                    key={i}
+                    src={item.url}
+                    alt={`${i} Slide`}
+                  />
+                ))}
               {/* <Carousel>
                 {fooditem.food_images &&
                   fooditem.food_images.map((item, i) => (
@@ -61,11 +92,11 @@ const FooditemDetails = (props) => {
                 <h1>{`₹${fooditem.food_price}`}</h1>
                 <div className="detailsBlock-2-1">
                   <div className="detailsBlock-2-1-1">
-                    <button>-</button>
-                    <input value="1" type="number" />
-                    <button>+</button>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <input readOnly type="number" value={quantity} />
+                    <button onClick={increaseQuantity}>+</button>
                   </div>{" "}
-                  <button>Add to Cart</button>
+                  <button onClick={addToCartHandler}>Add to Cart</button>
                 </div>
 
                 <p>

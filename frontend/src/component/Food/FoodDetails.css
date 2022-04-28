@@ -69,10 +69,10 @@
 .detailsBlock-2-1-1>input {
     border: none;
     padding: 0.5vmax;
-    width: 2vmax;
+    width: 2.5vmax;
     text-align: center;
     outline: none;
-    font: 500 0.8vmax "Roboto";
+    font: 500 1vmax "Franklin Gothic";
     color: black;
     background-color: white;
 }

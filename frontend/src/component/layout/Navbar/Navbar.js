@@ -69,7 +69,7 @@ export default function Navbar() {
           <a href="/search">
             <Search />
           </a>
-          <a href="/">
+          <a href="/cart">
             <Cart />
           </a>
           <a href="/login">

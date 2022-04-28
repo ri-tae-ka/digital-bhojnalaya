@@ -28,11 +28,12 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (error) {
-        window.alert(error);
+      window.alert(error);
       dispatch(clearErrors());
     }
     if (message) {
       window.alert(message);
+      navigate("/login");
     }
   }, [dispatch, error, message, navigate]);
 

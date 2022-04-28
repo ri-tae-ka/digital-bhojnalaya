@@ -6,7 +6,8 @@ import Person from "@mui/icons-material/Person";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import ListAlt from "@mui/icons-material/ListAlt";
 import Backdrop from "@material-ui/core/Backdrop";
-import { useDispatch } from "react-redux";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../actions/userAction";
 
@@ -14,11 +15,22 @@ const UserOptions = ({ user }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { cartItems } = useSelector((state) => state.cart);
+
   const [open, setOpen] = useState(false);
 
   const options = [
     { icon: <ListAlt />, name: "Orders", func: orders },
     { icon: <Person />, name: "Profile", func: account },
+    {
+      icon: (
+        <ShoppingCart
+          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+        />
+      ),
+      name: `Cart(${cartItems.length})`,
+      func: cart,
+    },
     { icon: <ExitToApp />, name: "Logout", func: logoutUser },
   ];
 
@@ -42,6 +54,10 @@ const UserOptions = ({ user }) => {
     navigate("/account");
   }
 
+  function cart() {
+    navigate("/cart");
+  }
+
   function logoutUser() {
     dispatch(logout());
     window.alert("Logged Out");
@@ -49,7 +65,7 @@ const UserOptions = ({ user }) => {
 
   return (
     <Fragment>
-      <Backdrop open={open} style={{zIndex: "10"}} />
+      <Backdrop open={open} style={{ zIndex: "10" }} />
       <SpeedDial
         className="speedDial"
         ariaLabel="SpeedDial tooltip example"
@@ -60,7 +76,11 @@ const UserOptions = ({ user }) => {
         icon={
           <img
             className="speedDialIcon"
-            src={user.avatar.url!=="This is sample url" ? user.avatar.url : "/logo192.png"}
+            src={
+              user.avatar.url !== "This is sample url"
+                ? user.avatar.url
+                : "/logo192.png"
+            }
             alt="Profile"
           />
         }
@@ -71,6 +91,7 @@ const UserOptions = ({ user }) => {
             icon={item.icon}
             tooltipTitle={item.name}
             onClick={item.func}
+            tooltipOpen
           />
         ))}
         ;
