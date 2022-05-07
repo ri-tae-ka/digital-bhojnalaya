@@ -1,7 +1,6 @@
 import "./Navbar.css";
 import { useState } from "react";
 import useViewport from "../../../viewport/useViewport";
-import { FaShoppingCart, FaSearch, FaAddressBook } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import logo from "../../../images/digitalLogo.png";
 import Search from "@mui/icons-material/SearchOutlined"

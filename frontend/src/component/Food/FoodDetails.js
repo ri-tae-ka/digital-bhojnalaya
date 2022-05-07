@@ -42,7 +42,7 @@ const FooditemDetails = () => {
     //alert("here");
     dispatch(addItemsToCart(id, quantity));
     //alert("now here");
-    window.alert("Item added to your cart!");
+    window.alert(`${fooditem.food_name} added to your cart!`);
   };
 
   useEffect(() => {

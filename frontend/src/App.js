@@ -21,6 +21,9 @@ import UpdatePassword from "./component/User/UpdatePassword.js";
 import ForgotPassword from "./component/User/ForgotPassword.js";
 import ResetPassword from "./component/User/ResetPassword.js";
 import Cart from "./component/Cart/Cart.js";
+import Shipping from "./component/Cart/Shipping.js";
+import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
+import Payment from "./component/Cart/Payment.js";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -56,22 +59,73 @@ function App() {
             <Route path="/login" element={<LoginSignup />} />
           </Routes>
           <Routes>
-            <Route path="/account" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
+            <Route
+              path="/account"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Routes>
-            <Route path="/me/update" element={<ProtectedRoute><UpdateProfile/></ProtectedRoute>} />
+            <Route
+              path="/me/update"
+              element={
+                <ProtectedRoute>
+                  <UpdateProfile />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Routes>
-            <Route path="/password/update" element={<ProtectedRoute><UpdatePassword/></ProtectedRoute>} />
+            <Route
+              path="/password/update"
+              element={
+                <ProtectedRoute>
+                  <UpdatePassword />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Routes>
-            <Route path="/password/forgot" element={<ForgotPassword/>} />
+            <Route path="/password/forgot" element={<ForgotPassword />} />
           </Routes>
           <Routes>
-            <Route path="/password/reset/:token" element={<ResetPassword/>} />
+            <Route path="/password/reset/:token" element={<ResetPassword />} />
           </Routes>
           <Routes>
             <Route path="/cart" element={<Cart />} />
+          </Routes>
+          <Routes>
+            <Route
+              path="/login/shipping"
+              element={
+                <ProtectedRoute>
+                  <Shipping />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/order/confirm"
+              element={
+                <ProtectedRoute>
+                  <ConfirmOrder />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/process/payment"
+              element={
+                <ProtectedRoute>
+                  <Payment />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Footer />
         </Router>

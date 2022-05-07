@@ -61,6 +61,7 @@ const UserOptions = ({ user }) => {
   function logoutUser() {
     dispatch(logout());
     window.alert("Logged Out");
+    navigate("/");
   }
 
   return (
