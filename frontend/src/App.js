@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./component/layout/Navbar/Navbar";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -24,12 +24,24 @@ import Cart from "./component/Cart/Cart.js";
 import Shipping from "./component/Cart/Shipping.js";
 import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
 import Payment from "./component/Cart/Payment.js";
+import OrderSuccess from "./component/Cart/OrderSuccess.js";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  React.useEffect(() => {
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v1/stripeapikey");
+    setStripeApiKey(data.stripeApiKey);
+  }
+
+  useEffect(() => {
     store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
@@ -117,12 +129,26 @@ function App() {
               }
             />
           </Routes>
+          {stripeApiKey && (
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <Routes>
+                <Route
+                  path="/process/payment"
+                  element={
+                    <ProtectedRoute>
+                      <Payment />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </Elements>
+          )}
           <Routes>
             <Route
-              path="/process/payment"
+              path="/success"
               element={
                 <ProtectedRoute>
-                  <Payment />
+                  <OrderSuccess />
                 </ProtectedRoute>
               }
             />

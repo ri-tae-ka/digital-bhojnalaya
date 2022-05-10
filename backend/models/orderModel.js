@@ -43,7 +43,7 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      image: {
+      food_image: {
         type: String,
         required: true,
       },
@@ -64,6 +64,10 @@ const orderSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+    },
   },
   paidAt: {
     type: Date,
@@ -78,6 +82,11 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     default: 0,
     required: true,
+  },
+  shippingPrice: {
+    type: Number,
+    required: true,
+    default: 0,
   },
   totalPrice: {
     type: Number,
