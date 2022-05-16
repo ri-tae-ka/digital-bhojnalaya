@@ -48,27 +48,27 @@ const MyOrders = () => {
       minWidth: 270,
       flex: 0.5,
     },
-    // {
-    //   field: "actions",
-    //   flex: 0.3,
-    //   headerName: "Actions",
-    //   minWidth: 150,
-    //   type: "number",
-    //   sortable: false,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Link to={`/order/${params.getValue(params.id, "id")}`}>
-    //         <LaunchIcon />
-    //       </Link>
-    //     );
-    //   },
-    // },
+    {
+      field: "actions",
+      flex: 0.3,
+      headerName: "Actions",
+      minWidth: 150,
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <Link to={`/order/${params.getValue(params.id, "id")}`}>
+            <LaunchIcon />
+          </Link>
+        );
+      },
+    },
   ];
 
   orders &&
     orders.forEach((item) => {
       rows.push({
-        itemsQty: item.orderItems.length,
+        itemsQty: item.items.length,
         id: item._id,
         status: item.orderStatus,
         amount: item.totalPrice,

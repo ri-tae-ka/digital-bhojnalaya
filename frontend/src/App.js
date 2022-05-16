@@ -26,6 +26,7 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
 import Payment from "./component/Cart/Payment.js";
 import OrderSuccess from "./component/Cart/OrderSuccess.js";
 import MyOrders from "./component/Order/MyOrders.js";
+import OrderDetails from "./component/Order/OrderDetails.js";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
@@ -120,16 +121,7 @@ function App() {
               }
             />
           </Routes>
-          <Routes>
-            <Route
-              path="/order/confirm"
-              element={
-                <ProtectedRoute>
-                  <ConfirmOrder />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
+
           {stripeApiKey && (
             <Elements stripe={loadStripe(stripeApiKey)}>
               <Routes>
@@ -160,6 +152,24 @@ function App() {
               element={
                 <ProtectedRoute>
                   <MyOrders />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/order/:id"
+              element={
+                <ProtectedRoute>
+                  <OrderDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/order/confirm"
+              element={
+                <ProtectedRoute>
+                  <ConfirmOrder />
                 </ProtectedRoute>
               }
             />

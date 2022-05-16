@@ -6,7 +6,7 @@ import { clearErrors, getFooditemDetails } from "../../actions/foodAction.js";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../layout/Loading/Loading";
 import Metadata from "../layout/Metadata";
-import {addItemsToCart} from "../../actions/cartAction";
+import { addItemsToCart } from "../../actions/cartAction";
 
 const FooditemDetails = () => {
   const dispatch = useDispatch();
@@ -96,7 +96,12 @@ const FooditemDetails = () => {
                     <input readOnly type="number" value={quantity} />
                     <button onClick={increaseQuantity}>+</button>
                   </div>{" "}
-                  <button onClick={addToCartHandler}>Add to Cart</button>
+                  <button
+                    disabled={fooditem.food_quantity < 1}
+                    onClick={addToCartHandler}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
 
                 <p>
