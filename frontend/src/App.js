@@ -27,9 +27,17 @@ import Payment from "./component/Cart/Payment.js";
 import OrderSuccess from "./component/Cart/OrderSuccess.js";
 import MyOrders from "./component/Order/MyOrders.js";
 import OrderDetails from "./component/Order/OrderDetails.js";
+import Dashboard from "./component/Admin/Dashboard.js";
+import FooditemList from "./component/Admin/FooditemList.js";
+import NewFooditem from "./component/Admin/NewFooditem.js";
+import UpdateFooditem from "./component/Admin/UpdateFooditem.js";
+import OrderList from "./component/Admin/OrderList.js";
+import ProcessOrder from "./component/Admin/ProcessOrder.js";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import UserList from "./component/Admin/UserList";
+import UpdateUser from "./component/Admin/UpdateUser";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -170,6 +178,86 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ConfirmOrder />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/fooditems"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <FooditemList />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/fooditem"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <NewFooditem />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/fooditem/:id"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <UpdateFooditem />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/orders"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <OrderList />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/order/:id"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <ProcessOrder />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <UserList />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/admin/user/:id"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <UpdateUser />
                 </ProtectedRoute>
               }
             />

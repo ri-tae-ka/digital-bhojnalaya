@@ -124,7 +124,7 @@ const LoginSignup = (props) => {
                   <div className="loginEmail">
                     <MailOutlineIcon />
                     <input
-                      type="mail"
+                      type="email"
                       placeholder="Email"
                       required
                       value={loginEmail}

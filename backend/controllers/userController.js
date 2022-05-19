@@ -8,11 +8,10 @@ const cloudinary = require("cloudinary");
 
 //register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-
   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: "profiles",
     width: 150,
-    crop: "scale"
+    crop: "scale",
   });
 
   const { name, email, password, contact_no } = req.body;
@@ -181,7 +180,7 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
     contact_no: req.body.contact_no,
   };
 
-  if(req.body.avatar != "") {
+  if (req.body.avatar != "") {
     const user = await User.findById(req.user.id);
 
     const imageId = user.avatar.public_id;
@@ -191,12 +190,12 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "profiles",
       width: 150,
-      crop: "scale"
+      crop: "scale",
     });
 
     newUserData.avatar = {
       public_id: myCloud.public_id,
-      url: myCloud.secure_url
+      url: myCloud.secure_url,
     };
   }
 
@@ -272,10 +271,14 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     );
   }
 
+  const imageId = user.avatar.public_id;
+
+  await cloudinary.v2.uploader.destroy(imageId);
+
   await user.remove();
 
   res.status(200).json({
     success: true,
-    message: "User deleted successfully!"
+    message: "User deleted successfully!",
   });
 });

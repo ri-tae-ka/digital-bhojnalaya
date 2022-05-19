@@ -15,7 +15,7 @@ const OrderDetails = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      window.alert(error);
       dispatch(clearErrors());
     }
 
