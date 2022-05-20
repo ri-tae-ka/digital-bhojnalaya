@@ -38,6 +38,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import UserList from "./component/Admin/UserList";
 import UpdateUser from "./component/Admin/UpdateUser";
+import Contact from "./component/Contact/Contact";
+import About from "./component/About/About";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -67,6 +69,12 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/Menu" element={<Menu />} />
+          </Routes>
+          <Routes>
+            <Route path="/Contact" element={<Contact />} />
+          </Routes>
+          <Routes>
+            <Route path="/About" element={<About />} />
           </Routes>
           <Routes>
             <Route path="/Menu/fooditem/:id" element={<FoodDetails />} />
