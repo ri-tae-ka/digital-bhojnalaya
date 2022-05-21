@@ -5,15 +5,17 @@ const { connect } = require("./app");
 const cloudinary = require("cloudinary");
 
 //uncaught exception error
-process.on("uncaughtException", (err)=> {
-    console.log(`Error: ${err.message}`);
-    console.log(`Shutting down the server due to uncuaght exception error`);
+process.on("uncaughtException", (err) => {
+  console.log(`Error: ${err.message}`);
+  console.log(`Shutting down the server due to uncuaght exception error`);
 
-    process.exit(1);
+  process.exit(1);
 });
 
 //config
-dotenv.config({ path: "backend/config/config.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  dotenv.config({ path: "backend/config/config.env" });
+}
 
 //connect to database
 connectDatabase();
@@ -27,7 +29,6 @@ cloudinary.config({
 const server = app.listen(process.env.PORT, () => {
   console.log(`Server is working on http://localhost:${process.env.PORT}`);
 });
-
 
 //unhandled promise rejection
 process.on("unhandledRejection", (err) => {
